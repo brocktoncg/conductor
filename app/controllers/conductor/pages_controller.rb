@@ -3,7 +3,6 @@ module Conductor
 
     load_and_authorize_resource :except => [:show, :create, :update, :preview]
     authorize_resource :only => [:create, :update, :preview]
-    helper_method :sort_column, :sort_direction
 
     def index
       @pages = Page.order('lft ASC')

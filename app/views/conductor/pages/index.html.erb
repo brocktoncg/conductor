@@ -1,0 +1,20 @@
+<div class="row-fluid">
+
+<div class="span8">
+  <%= nested_li(@pages) do |page| %>
+    <%= page.title %>
+    (<%= link_to 'Edit', edit_page_path(page) %>)
+    (<%= link_to 'New Child', page_new_child_path(page) %>)
+    (<%= link_to 'View', page %>)
+    <%= link_to('Delete', page, method: :delete, data: { confirm: 'Are you sure?' }) if page.deletable? %>
+  <% end %>
+</div>
+
+<div class="span4">
+  <%= link_to 'New Page', new_page_path, class: 'btn btn-success', id: 'new-page' %>
+  <a id="reorder" class="btn">Re-order</a>
+  <a href="/pages" id="cancel" style="display:none" class="btn btn-warning">Cancel</a>
+  <a id="save" style="display:none" class="btn btn-danger">Save</a>
+</div>
+
+</div><!--/.row-fluid -->
