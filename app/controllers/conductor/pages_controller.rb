@@ -6,10 +6,6 @@ module Conductor
 
     def index
       @pages = Page.order('lft ASC')
-      respond_to do |format|
-        format.html
-        format.json { render json: @pages }
-      end
     end
 
     def show
@@ -30,10 +26,6 @@ module Conductor
     def new
       @page = Page.new
       @page.page_parts.new(title: 'body')
-      respond_to do |format|
-        format.html
-        format.json { render json: @page }
-      end
     end
 
     def edit
@@ -43,55 +35,42 @@ module Conductor
       parent_id = params[:page][:parent_id]
       params[:page].delete('parent_id')
       @page = Page.new(params[:page])
-      respond_to do |format|
-        if @page.save
-          if !parent_id.blank?
-            parent = Page.find(parent_id)
-            @page.move_to_child_of(parent)
-          end
-          format.html { redirect_to @page, notice: 'Page was successfully created.' }
-          format.json { render json: @page, status: :created, location: @page }
-        else
-          format.html { render action: "new" }
-          format.json { render json: @page.errors, status: :unprocessable_entity }
+      if @page.save
+        if !parent_id.blank?
+          parent = Page.find(parent_id)
+          @page.move_to_child_of(parent)
         end
+        redirect_to @page, notice: 'Page was successfully created.'
+      else
+        render action: "new"
       end
     end
 
     def update
       parent_id = params[:page][:parent_id]
       params[:page].delete('parent_id')
-
       if params[:commit] == "Preview"
         @page = Page.new(params[:page])
         render 'show'
         return true
       end
-
       @page = Page.find(params[:id])
-      respond_to do |format|
-        if @page.update_attributes(params[:page])
-          if parent_id.blank?
-            @page.move_to_root
-          else
-            parent = Page.find(parent_id)
-            @page.move_to_child_of(parent)
-          end
-          format.html { redirect_to @page, notice: 'Page was successfully updated.' }
-          format.json { head :no_content }
+      if @page.update_attributes(params[:page])
+        if parent_id.blank?
+          @page.move_to_root
         else
-          format.html { render action: "edit" }
-          format.json { render json: @page.errors, status: :unprocessable_entity }
+          parent = Page.find(parent_id)
+          @page.move_to_child_of(parent)
         end
+        redirect_to @page, notice: 'Page was successfully updated.'
+      else
+        render action: "edit"
       end
     end
 
     def destroy
       @page.destroy
-      respond_to do |format|
-        format.html { redirect_to pages_url }
-        format.json { head :no_content }
-      end
+      redirect_to pages_url
     end
     
     def new_child
