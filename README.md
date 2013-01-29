@@ -12,6 +12,10 @@ Kyle Zarazan, Technical Director, [Brockton Creative Group][1]
 
     gem 'conductor', '~>0.1'
 
+####Run Install Generator
+
+    rails g conductor:install
+
 ####config/routes.rb
 
     mount Conductor::Engine => "/conductor"

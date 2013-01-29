@@ -1,30 +1,29 @@
 module Conductor
   class PagesController < ApplicationController
 
-    load_and_authorize_resource :except => [:show, :create, :update, :preview]
-    authorize_resource :only => [:create, :update, :preview]
+    helper 'conductor/tree'
 
     def index
-      @pages = Page.order('lft ASC')
+      @pages = Conductor::Page.order('lft ASC')
     end
 
     def show
       if params[:slug]
-        @page = Page.find_by_slug(params[:slug])
+        @page = Conductor::Page.find_by_slug(params[:slug])
         if @page.nil? || @page.draft?
           render_404
         elsif @page.link_url && !@page.link_url.empty?
           redirect_to @page.link_url
         end
       elsif params[:id]
-        @page = Page.find(params[:id])
+        @page = Conductor::Page.find(params[:id])
       else
-        @page = Page.find_by_link_url('/')
+        @page = Conductor::Page.find_by_link_url('/')
       end
     end
 
     def new
-      @page = Page.new
+      @page = Conductor::Page.new
       @page.page_parts.new(title: 'body')
     end
 
@@ -34,10 +33,10 @@ module Conductor
     def create
       parent_id = params[:page][:parent_id]
       params[:page].delete('parent_id')
-      @page = Page.new(params[:page])
+      @page = Conductor::Page.new(params[:page])
       if @page.save
         if !parent_id.blank?
-          parent = Page.find(parent_id)
+          parent = Conductor::Page.find(parent_id)
           @page.move_to_child_of(parent)
         end
         redirect_to @page, notice: 'Page was successfully created.'
@@ -50,16 +49,16 @@ module Conductor
       parent_id = params[:page][:parent_id]
       params[:page].delete('parent_id')
       if params[:commit] == "Preview"
-        @page = Page.new(params[:page])
+        @page = Conductor::Page.new(params[:page])
         render 'show'
         return true
       end
-      @page = Page.find(params[:id])
+      @page = Conductor::Page.find(params[:id])
       if @page.update_attributes(params[:page])
         if parent_id.blank?
           @page.move_to_root
         else
-          parent = Page.find(parent_id)
+          parent = Conductor::Page.find(parent_id)
           @page.move_to_child_of(parent)
         end
         redirect_to @page, notice: 'Page was successfully updated.'
@@ -74,13 +73,13 @@ module Conductor
     end
     
     def new_child
-      @page = Page.new
+      @page = Conductor::Page.new
       @page.parent_id = params[:page_id]
       render 'new'
     end
 
     def savesort
-      Page.save_sort(params[:set])
+      Conductor::Page.save_sort(params[:set])
       head :no_content
     end
 

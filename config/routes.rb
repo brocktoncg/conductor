@@ -1,6 +1,6 @@
 Conductor::Engine.routes.draw do
 
-	resource :pages
+	resources :pages
 
 	root :to => "pages#index"
 

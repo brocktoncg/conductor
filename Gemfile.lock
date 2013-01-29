@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    conductor (0.0.1)
+    conductor (0.0.2)
       awesome_nested_set (~> 2.1.5)
       gemboree (~> 0.1.2)
       rails (~> 3.2.8)

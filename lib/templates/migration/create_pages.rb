@@ -1,7 +1,7 @@
 class CreatePages < ActiveRecord::Migration
 
   def change
-    create_table :pages do |t|
+    create_table :conductor_pages do |t|
       t.string :title
       t.string :slug
       t.string :browser_title
@@ -21,11 +21,11 @@ class CreatePages < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :pages, :id
-    add_index :pages, :parent_id
-    add_index :pages, :slug
-    add_index :pages, :lft
-    add_index :pages, :rgt
+    add_index :conductor_pages, :id
+    add_index :conductor_pages, :parent_id
+    add_index :conductor_pages, :slug
+    add_index :conductor_pages, :lft
+    add_index :conductor_pages, :rgt
   end
 
 end
