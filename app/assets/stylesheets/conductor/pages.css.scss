@@ -1,0 +1,45 @@
+.sortable li {
+	list-style: none;
+	border: 1px;
+}
+
+.ui-sortable li {
+	cursor: move;
+}
+
+.item {
+  padding: 5px;
+  background: #e5e5e5;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+
+li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
+	border-color: #999;
+	background: #fafafa;
+}
+
+.disclose {
+	cursor: pointer;
+	width: 10px;
+	display: none;
+}
+
+.sortable li.mjs-nestedSortable-collapsed > ol {
+	display: none;
+}
+
+.sortable li.mjs-nestedSortable-branch > div > .disclose {
+	display: inline-block;
+}
+
+.sortable li.mjs-nestedSortable-collapsed > div > .disclose > span:before {
+	content: '+ ';
+}
+
+.sortable li.mjs-nestedSortable-expanded > div > .disclose > span:before {
+	content: '- ';
+}
+.placeholder {
+	outline: 1px dashed #4183C4;
+}

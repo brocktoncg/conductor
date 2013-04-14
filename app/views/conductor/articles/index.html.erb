@@ -1,0 +1,38 @@
+<h1>Listing articles</h1>
+
+<div class="row-fluid">
+
+<table class="table table-condensed">
+    <tr>
+      <th><%= sortable 'user_id' %></th>
+      <th><%= sortable 'title' %></th>
+      <th><%= sortable 'post_at' %></th>
+      <th><%= sortable 'expire_at' %></th>
+      <th><%= sortable 'draft' %></th>
+      <th><%= sortable 'featured' %></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <%= content_tag_for(:tr, @articles) do |article| %>
+      <td><%= article.user.try(:full_name) %></td>
+      <td><%= article.title %></td>
+      <td><%= long_date article.post_at %></td>
+      <td><%= long_date article.expire_at %></td>
+      <td><%= article.draft %></td>
+      <td><%= article.featured %></td>
+      <td><%= link_to 'Show', article.permalink, class: 'btn' %></td>
+      <td><%= link_to 'Edit', edit_article_path(article), class: 'btn btn-edit' %></td>
+      <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-destroy' %></td>
+    <% end %>
+
+</table>
+
+<%= will_paginate  @articles %>
+
+<div class="form-actions">
+  <%= link_to 'New Article', new_article_path, class: 'btn btn-success' %>
+</div>
+
+</div><!--/.row-fluid -->

@@ -1,0 +1,13 @@
+<div class="row-fluid">
+
+<div class="page-header">
+  <h2><%= @page.title %></h2>
+</div>
+
+<% @page.page_parts.each do |part| %>
+<div>
+	<%= part.body.try(:html_safe) %>
+</div>
+<% end %>
+
+</div>

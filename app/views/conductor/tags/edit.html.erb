@@ -1,0 +1,22 @@
+<div class="page-header">
+  <h1>Editing Tag</h1>
+</div>
+
+<div class="row-fluid">
+	
+  <div class="span8">
+    <%= render 'form' %>
+  </div>
+    
+  <div class="span4">
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+		<li><%= link_to '<i class="icon-list"></i> Tag Index'.html_safe, tags_path %></li>
+        <li><%= link_to '<i class="icon-eye-open"></i> Show'.html_safe, @tag %></li>
+        <li><%= link_to '<i class="icon-minus"></i> Destroy'.html_safe, @tag, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+		<li><%= link_to '<i class="icon-plus"></i> New Tag'.html_safe, new_tag_path %></li>
+      </ul>
+    </div><!--/.well -->
+  </div>
+  
+</div><!--/.row-fluid -->
