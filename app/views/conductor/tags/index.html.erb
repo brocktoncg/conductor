@@ -1,0 +1,22 @@
+<h1>Listing tags</h1>
+
+<div class="row-fluid">
+
+<table class="table table-condensed">
+    <tr>
+      <th><%= sortable 'name' %></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <%= content_tag_for(:tr, @tags) do |tag| %>
+      <td><%= tag.name %></td>
+      <td><%= link_to 'Edit', edit_tag_path(tag), class: 'btn btn-edit' %></td>
+      <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-destroy' %></td>
+    <% end %>
+
+</table>
+
+<%= will_paginate  @tags %>
+
+</div><!--/.row-fluid -->

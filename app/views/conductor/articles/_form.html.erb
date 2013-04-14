@@ -1,0 +1,47 @@
+<%= form_for(@article, :html => { class: 'form-horizontal well' }) do |f| %>
+
+  <%= render 'layouts/errors', :target => @article %>
+
+  <div class="control-group">
+    <%= f.label :title, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title %>
+    </div>
+  </div>
+
+  <div class="control-group">
+      <%= f.text_area :body, class: 'tinymce' %>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :post_at, class: 'control-label' %>
+    <div class="controls">
+    <%= f.text_field :post_at, class: 'datetime', :value => input_date(f.object.post_at) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :expire_at, class: 'control-label' %>
+    <div class="controls">
+    <%= f.text_field :expire_at, class: 'datetime', :value => input_date(f.object.expire_at) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= select('article', 'draft', [["Draft", true],["Published", false]]) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= f.check_box :featured %> Featured
+    </div>
+  </div>
+
+  <div class="form-actions">
+  	  <%= link_to 'Cancel', articles_path, class: 'btn' %>
+      <%= f.submit class: 'btn btn-success' %>
+  </div>
+
+<% end %>

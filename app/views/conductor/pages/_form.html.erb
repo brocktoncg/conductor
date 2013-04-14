@@ -1,0 +1,100 @@
+<%= form_for(@page, :html => { class: 'form-horizontal well' }) do |f| %>
+
+  <%= render 'layouts/errors', :target => @page %>
+
+  <div class="control-group">
+    <%= f.label :title, 'Page Title', class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, class: 'input-xlarge' %>
+    </div>
+  </div>
+
+  <%= link_to_add_fields "Add Content Section", f, :page_parts %>
+
+  <%= f.fields_for :page_parts do |page_part_form| %>
+    <%= render 'page_part_fields', :f => page_part_form %>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :browser_title, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :browser_title, class: 'input-xlarge' %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :menu_title, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :menu_title, class: 'input-xlarge' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :slug, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :slug, class: 'input-xlarge' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :link_url, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :link_url, class: 'input-xlarge' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :keywords, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :keywords, class: 'input-xlarge' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :description, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, class: 'input-xlarge' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :show_in_menu, class: 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :show_in_menu, class: 'input-xlarge' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :skip_to_first_child, class: 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :skip_to_first_child, class: 'input-xlarge' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :deletable, class: 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :deletable, class: 'input-xlarge' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= select('page', 'draft', [["Draft", true],["Published", false]]) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :parent, class: 'control-label' %>
+    <div class="controls">
+      <%= select("page", "parent_id", Conductor::Page.all.collect{ |p| [p.title, p.id]}, { :include_blank => true }) %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+  	  <%= link_to 'Cancel', pages_path, class: 'btn' %>
+      <%= f.submit('Preview', class: 'btn') if !f.object.new_record? %>
+      <%= f.submit 'Save', class: 'btn btn-success' %>
+  </div>
+
+<% end %>
