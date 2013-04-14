@@ -1,4 +1,7 @@
 /*
  *= require_self
+ *= require gemboree
+ *= require jquery-ui
+ *= require timepicker
  *= require_tree .
  */

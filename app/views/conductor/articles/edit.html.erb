@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1>Editing Article</h1>
+</div>
+
+<div class="row-fluid">
+	
+  <div class="span8">
+    <%= render 'form' %>
+  </div>
+    
+  <div class="span4 well">
+    
+    <%= form_tag(tag_articles_path(@article)) do %>
+      <%= label_tag :tag_name, 'Tag' %>
+      <%= text_field_tag :tag_name %>
+      <%= submit_tag 'Add', class: 'btn' %>
+    <% end %>
+
+    <% @article.tags.each do |tag| %>
+      <li>
+        <%= tag.name %>
+        <%= link_to 'Remove', untag_articles_path(@article, tag), method: 'post' %>
+      </li>
+    <% end %>
+
+  </div>
+  
+</div><!--/.row-fluid -->

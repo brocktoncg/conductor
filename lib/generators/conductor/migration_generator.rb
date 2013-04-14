@@ -18,6 +18,12 @@ module Conductor
 
       def create_migration
         migration_template "create_pages.rb", "db/migrate/create_pages"
+        sleep(1)
+        migration_template "create_page_parts.rb", "db/migrate/create_page_parts"
+        sleep(1)
+        migration_template "create_articles.rb", "db/migrate/create_articles"
+        sleep(1)
+        migration_template "create_tags.rb", "db/migrate/create_tags"
       end
 
     end

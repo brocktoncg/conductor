@@ -7,7 +7,7 @@ module Conductor
     	end
 
         def mount_engine
-            route "mount Conductor::Engine => '/conductor'"
+            route "mount Conductor::Engine => '/'"
         end
 
     	def copy_migrations

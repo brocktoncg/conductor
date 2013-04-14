@@ -1,0 +1,43 @@
+<div class="row-fluid">
+
+<div class="span8">
+  <h2><%= @article.title %></h2>
+	<%= @article.body.try(:html_safe) %>
+</div>
+
+</div><!--/.row-fluid -->
+
+<div class="page-header"><h4>Comment</h4></div>
+
+<%= form_for(@comment) do |f| %>
+
+	<%= render 'layouts/errors', :target => @comment %>
+
+	<%= f.hidden_field :article_id %>
+
+	<div class="control-group">
+    <%= f.label :name, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, class: "input-xxlarge" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :email, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email, class: "input-xxlarge" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :body, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :body, rows: 6, class: "input-xxlarge" %>
+    </div>
+  </div>
+
+  <%= f.submit 'Create', class: 'btn' %>
+
+<% end %>
+
+<%= render @article.comments %>

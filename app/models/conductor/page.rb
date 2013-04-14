@@ -40,7 +40,7 @@ module Conductor
       set = set.to_hash
       set.each_with_index do |item, index|
       	item = item.second if item.kind_of?(Array)
-        dbitem = Page.find(item['id'])
+        dbitem = Conductor::Page.find(item['id'])
         begin
           prev_item.nil? ? dbitem.move_to_root : dbitem.move_to_right_of(prev_item)
         rescue ActiveRecord::ActiveRecordError
@@ -54,7 +54,7 @@ module Conductor
       prevchild = nil
       element['children'].each do |child|
       	child = child.second if child.kind_of?(Array)
-        childitem = Page.find(child['id'])
+        childitem = Conductor::Page.find(child['id'])
         begin
           prevchild.nil? ? childitem.move_to_child_of(dbitem) : childitem.move_to_right_of(prevchild)
         rescue ActiveRecord::ActiveRecordError

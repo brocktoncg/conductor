@@ -1,0 +1,13 @@
+<h4>Articles</h4>
+<% @articles.each do |article| %>
+	<div>
+		<%= link_to article.title, article.permalink %>
+	</div>
+<% end %>
+
+<h4>Tags</h4>
+<ul>
+<% Tag.all.each do |tag| %>
+	<li><%= link_to tag.name.titleize, '#' %></li>
+<% end %>
+</ul>

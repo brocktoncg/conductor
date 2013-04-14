@@ -1,8 +1,6 @@
 module Conductor
   class PagesController < ApplicationController
 
-    helper 'conductor/tree'
-
     def index
       @pages = Conductor::Page.order('lft ASC')
     end
@@ -28,6 +26,7 @@ module Conductor
     end
 
     def edit
+      @page = Conductor::Page.find(params[:id])
     end
 
     def create
