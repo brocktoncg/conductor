@@ -1,6 +1,6 @@
 #Conductor
 
-Ruby on Rails Content Management System
+Ruby on Rails Minimalistic Content Management System
 
 ## Team
 
@@ -8,18 +8,18 @@ Kyle Zarazan, Technical Director, [Brockton Creative Group][1]
 
 ##Install
 
-####Gemfile
+####Add the gem to your Gemfile
 
-    gem 'conductor', '~>0.1'
+    gem 'conductor'
 
-####Run Install Generator
+####Run the Install Generator
 
     rails g conductor:install
-
-####config/routes.rb
-
-    mount Conductor::Engine => "/conductor"
     
+####Migrate the database
+
+		rake db:migrate
+
 ##License
 
 MIT
